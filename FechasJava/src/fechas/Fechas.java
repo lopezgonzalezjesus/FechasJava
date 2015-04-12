@@ -133,32 +133,33 @@ public class Fechas {
             System.out.println(df.format(fechaManual.getTime()));
         }
 	
-	/*
-	 * La clase Locale puede ser usada conjuntamente con DateFormat para
-	 * que el formato de salida de una fecha sea específico para
-	 * una localización determinada.
-	 */
-    System.out.println("\nUSO DE CLASE LOCALE");
-    //Creamos un objeto Locale para localización italiana
-	Locale locIt = new Locale("it", "IT");
-	//Creamos un objeto DateFormat de tipo completo y usamos el locale italiano previo
-	DateFormat dfIt = DateFormat.getDateInstance(DateFormat.FULL, locIt);
-	//Aplicamos el formato a nuestra fecha actual
-	System.out.println(dfIt.format(fechaActual));
-	
-	//Creamos un objeto Locale para localización estadounidense
-	Locale locUs = new Locale("en", "US");
-	//Creamos un objeto DateFormat de tipo completo y usamos el locale anterior
-	DateFormat dfUs = DateFormat.getDateInstance(DateFormat.FULL, locUs);
-	//Le damos formato
-	System.out.println(dfUs.format(fechaActual));
-	
-	/*
-	* Para ver las Locales disponibles disponemos de getAvailableLocales()
-	* Locale[] locales = Locale.getAvailableLocales();
-	* for (int i = 0; i < locales.length; i++) {
-	*	System.out.println(i + ":" + locales[i]);
-	* }
-	*/
+		/*
+		 * La clase Locale puede ser usada conjuntamente con DateFormat para
+		 * que el formato de salida de una fecha sea específico para
+		 * una localización determinada.
+		 */
+	    System.out.println("\nUSO DE CLASE LOCALE");
+	    //Creamos un objeto Locale para localización italiana
+		Locale locIt = new Locale("it", "IT");
+		//Creamos un objeto DateFormat de tipo completo y usamos el locale italiano previo
+		DateFormat dfIt = DateFormat.getDateInstance(DateFormat.FULL, locIt);
+		//Aplicamos el formato a nuestra fecha actual
+		System.out.println(dfIt.format(fechaActual));
+		
+		//Creamos un objeto Locale para localización estadounidense
+		Locale locUs = new Locale("en", "US");
+		//Creamos un objeto DateFormat de tipo completo y usamos el locale anterior
+		DateFormat dfUs = DateFormat.getDateInstance(DateFormat.FULL, locUs);
+		//Le damos formato
+		System.out.println(dfUs.format(fechaActual));
+		
+		/*
+		* Para ver las Locales disponibles disponemos de getAvailableLocales()
+		* Locale[] locales = Locale.getAvailableLocales();
+		* for (int i = 0; i < locales.length; i++) {
+		*	System.out.println(i + ":" + locales[i]);
+		* }
+		*/
+
 	}
 }

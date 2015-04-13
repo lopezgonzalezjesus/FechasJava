@@ -1,5 +1,7 @@
 package fechas;
 import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -59,6 +61,8 @@ public class Fechas {
 		System.out.println(fechaGetInstance.get(Calendar.MONTH));
 		//Extracción del día del mes actual
 		System.out.println(fechaGetInstance.get(Calendar.DAY_OF_MONTH));
+		//Extracción del día de la semana actual
+		System.out.println(fechaGetInstance.get(Calendar.DAY_OF_WEEK));
 		/*
 		 * Existen muchos campos, los cuales podemos ver en el siguiente enlace 
 		 * -> https://docs.oracle.com/javase/7/docs/api/java/util/Calendar.html
@@ -91,6 +95,28 @@ public class Fechas {
 		Calendar fechaManual = new GregorianCalendar(2015, 01, 22); //Fecha manual directamente en el constructor
 		Calendar fechaManualConSet = new GregorianCalendar(); fechaManualConSet.set(2015, 01, 22); //Fecha manual con set()
 		System.out.println(fechaManual.get(Calendar.DATE) + "/" + fechaManual.get(Calendar.MONTH) + "/" + fechaManual.get(Calendar.YEAR));
+		
+		/*
+		 * Pero...¿Qué pasaria si insertamos manualmente una fecha que no fuese válida?
+		 */
+		Calendar fechaInvalida = new GregorianCalendar(2015, 01, 31); //31 de Febrero de 2015
+		System.out.println("Al introducir 31 de Febrero de 2015, nos modifica a 3 de Marzo de 2015");
+		System.out.println(fechaInvalida.getTime());
+		
+		/*
+		 * Para evitar que se introduzcan fechas invalidas en nuestro programa debemos desactivar
+		 * la opcion setLenient() mediante un DateFormat.
+		 */
+		System.out.println("Con setLenient(false) evitamos fechas invalidas al lanzar una excepción");
+		try {
+			   String fechaInvalidaConLenient = "32/02/2015"; //Debemos de introducir la fecha como cadena
+			   SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+			   dateFormat.setLenient(false); //Desactivamos el lenient
+			   Date fecha = dateFormat.parse(fechaInvalidaConLenient); //Formateamos la fecha
+			   System.out.println("Fecha válida: "+fecha.toString());
+			  } catch (ParseException e) {
+			   System.out.println("Fecha no válida");
+		}
 
 		/*
 		 * Operaciones con Fechas
@@ -106,6 +132,13 @@ public class Fechas {
 		System.out.println("Restamos cinco dias al día del mes actual");
 		System.out.println(fechaManual.getTime());
 		//Tambien podemos sumar horas, meses, años, etc...
+		/*
+		 * Cabe decir que existe otro metodo para operar con fechas llamado roll(). La principal
+		 * diferencia con add() es que cuando se produce un intercambio de unidades, el método
+		 * roll() no incrementa la unidad inmediatamente superior. Por ejemplo si sumamos al 28 de Febrero 
+		 * 5 días, el campo días pasará a ser 5, pero el campo mes no se verá afectado.
+		 * fechaManual.roll(int campo, int incremento);
+		 */
 		
 		
 		/*
@@ -153,13 +186,12 @@ public class Fechas {
 		//Le damos formato
 		System.out.println(dfUs.format(fechaActual));
 		
-		/*
-		* Para ver las Locales disponibles disponemos de getAvailableLocales()
-		* Locale[] locales = Locale.getAvailableLocales();
-		* for (int i = 0; i < locales.length; i++) {
-		*	System.out.println(i + ":" + locales[i]);
-		* }
-		*/
+		
+//		Para ver las Locales disponibles disponemos de getAvailableLocales()
+//		 Locale[] locales = Locale.getAvailableLocales();
+//		 for (int i = 0; i < locales.length; i++) {
+//			System.out.println(i + ":" + locales[i]);
+//		 }
 
 	}
 }

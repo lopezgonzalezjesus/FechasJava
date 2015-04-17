@@ -1,7 +1,5 @@
 package fechas;
 import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -141,6 +139,25 @@ public class Fechas {
 		 * fechaManual.roll(int campo, int incremento);
 		 */
 		
+		/*
+		 * Comparar fechas con before() y after()
+		 */
+		//Creamos una fecha actual
+		Calendar presente = new GregorianCalendar();
+		//Creamos una fecha futura sumandole un mes a la actual
+		Calendar futuro = new GregorianCalendar();
+		futuro.add(Calendar.MONTH, 1);
+		//Creamos una fecha pasada restandole un mes a la actual
+		Calendar pasado = new GregorianCalendar();
+		pasado.add(Calendar.MONTH, -1);
+		
+		System.out.println("\nCOMPARAR FECHAS");
+		//Comparamos fecha actual y futura
+		System.out.println("Presente antes que futuro: " + presente.before(futuro));
+		System.out.println("Presente despues que futuro: " + presente.after(futuro));
+		//Comparamos fecha actual y pasada
+		System.out.println("Presente antes que pasado: " + presente.before(pasado));
+		System.out.println("Presente despues que pasado: " + presente.after(pasado));
 		
 		/*
 		 * Clase DateFormat

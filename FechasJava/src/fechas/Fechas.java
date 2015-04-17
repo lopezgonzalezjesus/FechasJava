@@ -51,6 +51,8 @@ public class Fechas {
 		//Instanciacion mediante getInstance()
 		Calendar fechaGetInstance = Calendar.getInstance();
 		System.out.println("\nMETODO getInstance()");
+		//Mostrar fecha
+		System.out.println(fechaGetInstance.getTime());
 		/*
 		 * Para extraer los datos necesarios hacemos uso de uno único metodo get(), 
 		 * al cual le pasamos por parametro el campo que queremos conseguir.
@@ -71,6 +73,8 @@ public class Fechas {
 		//Instanciación mediante GregorianCalendar
 		Calendar fechaGregorian = new GregorianCalendar();
 		System.out.println("\nGREGORIAN CALENDAR");
+		//Fecha
+		System.out.println(fechaGregorian.getTime());
 		//Dia de la semana
 		System.out.println(fechaGregorian.get(Calendar.WEEK_OF_YEAR));
 		//Hora
@@ -94,8 +98,7 @@ public class Fechas {
 													//YYYY, MM, DD
 		Calendar fechaManual = new GregorianCalendar(2015, 01, 22); //Fecha manual directamente en el constructor
 		Calendar fechaManualConSet = new GregorianCalendar(); fechaManualConSet.set(2015, 01, 22); //Fecha manual con set()
-		System.out.println(fechaManual.get(Calendar.DATE) + "/" + fechaManual.get(Calendar.MONTH) + "/" + fechaManual.get(Calendar.YEAR));
-		
+		System.out.println(fechaManual.getTime());
 		/*
 		 * Pero...¿Qué pasaria si insertamos manualmente una fecha que no fuese válida?
 		 */
@@ -105,17 +108,15 @@ public class Fechas {
 		
 		/*
 		 * Para evitar que se introduzcan fechas invalidas en nuestro programa debemos desactivar
-		 * la opcion setLenient() mediante un DateFormat.
+		 * la opcion setLenient().
 		 */
 		System.out.println("Con setLenient(false) evitamos fechas invalidas al lanzar una excepción");
+		Calendar fechaInvalidaNoLenient = new GregorianCalendar(2015, 01, 31);
+		fechaInvalidaNoLenient.setLenient(false);
 		try {
-			   String fechaInvalidaConLenient = "32/02/2015"; //Debemos de introducir la fecha como cadena
-			   SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-			   dateFormat.setLenient(false); //Desactivamos el lenient
-			   Date fecha = dateFormat.parse(fechaInvalidaConLenient); //Formateamos la fecha
-			   System.out.println("Fecha válida: "+fecha.toString());
-			  } catch (ParseException e) {
-			   System.out.println("Fecha no válida");
+			System.out.println(fechaInvalidaNoLenient.getTime());
+		} catch (Exception e) {
+			System.out.println("Fecha invalida");
 		}
 
 		/*
@@ -192,6 +193,17 @@ public class Fechas {
 //		 for (int i = 0; i < locales.length; i++) {
 //			System.out.println(i + ":" + locales[i]);
 //		 }
+		
+		/*
+		 * Con System.out.format() tambien podemos cambiar el formato de salida de una fecha
+		 */
+		System.out.println("\nSYSTEM.OUT.FORMAT()");
+		Calendar c = new GregorianCalendar();
+	    System.out.format("%tB %te, %tY%n", c, c, c); // -->  "May 29, 2006"
+
+	    System.out.format("%tl:%tM %tp%n", c, c, c);  // -->  "2:34 am"
+
+	    System.out.format("%tD%n", c);    // -->  "05/29/06"
 
 	}
 }
